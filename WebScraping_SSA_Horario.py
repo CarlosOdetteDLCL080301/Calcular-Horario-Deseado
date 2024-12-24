@@ -7,7 +7,7 @@ misMaterias = {'1433': 'ANALISIS NUMERICO',    '1322': 'CINEMATICA Y DINAMICA (2
 
 longitudParaCentrar = 100
 hora_entrada = 7
-hora_salida = 13
+hora_salida = 11
 # Esta es la columna que representa el cupo en el DataFrame
 columna_cupo = 7
 # Lista de claves que deseas conservar
