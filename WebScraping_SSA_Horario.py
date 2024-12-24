@@ -131,7 +131,7 @@ def imprimirMaterias(materiasPorMeter):
         
         # Filtrar el DataFrame para entregar solo las columnas deseadas
         #df_excluyendoRenglones = filtrarTabla(df)
-        # Imprimir el nombre de la materia y el DataFrame seleccionado
+        # Imprimir el Asignatura de la materia y el DataFrame seleccionado
         
         #formatoDeImpresion(df_excluyendoRenglones, nombreMateria, materia)
         df_filtrado = filtrarTabla(df)
@@ -153,9 +153,9 @@ def mostrar_resultados_combinados(resultados_por_materia):
     ventana.attributes("-fullscreen", True)
 
     # Nombres de los encabezados a mostrar 
-    tree = ttk.Treeview(frame, columns=("Clave", "Nombre", "Grupo", "Profesor", "Horario", "Días", "Cupo"), show="headings")
+    tree = ttk.Treeview(frame, columns=("Clave", "Asignatura", "Grupo", "Profesor", "Horario", "Días", "Cupo"), show="headings")
     tree.heading("Clave", text="Clave")
-    tree.heading("Nombre", text="Nombre")
+    tree.heading("Asignatura", text="Asignatura")
     tree.heading("Grupo", text="Grupo")
     tree.heading("Profesor", text="Profesor")
     tree.heading("Horario", text="Horario")
@@ -164,7 +164,7 @@ def mostrar_resultados_combinados(resultados_por_materia):
 
     # Anchos de los encabezados y ubicación de los mismos  
     tree.column("Clave", width=10, anchor="center")
-    tree.column("Nombre", width=230, anchor="w")  
+    tree.column("Asignatura", width=230, anchor="w")  
     tree.column("Grupo", width=10, anchor="center")
     tree.column("Profesor", width=200, anchor="w")
     tree.column("Horario", width=10, anchor="center")
@@ -178,7 +178,7 @@ def mostrar_resultados_combinados(resultados_por_materia):
 
     tree.pack(fill=tk.BOTH, expand=True, padx=10, pady=10)
 
-     # Generar colores aleatorios para cada "Nombre"
+     # Generar colores aleatorios para cada "Asignatura"
     def generar_color():
         return f'#{random.randint(0, 255):02x}{random.randint(0, 255):02x}{random.randint(0, 255):02x}'
 
@@ -205,7 +205,7 @@ def mostrar_resultados_combinados(resultados_por_materia):
             ordenar_por_asignatura_y_horario(tree)  # Ordenamiento complejo
 
     # Lista de opciones para el ordenamiento
-    columnas_sencillas = ["Clave", "Nombre", "Profesor", "Horario", "Días", "Cupo"]
+    columnas_sencillas = ["Clave", "Asignatura", "Profesor", "Horario", "Días", "Cupo"]
     opciones = columnas_sencillas + ["Asignatura y Horario"]
 
     # Crear combobox para seleccionar el ordenamiento
@@ -236,13 +236,13 @@ def ordenar_por_columna(tree, columna, reverse):
 
 def ordenar_por_asignatura_y_horario(tree):
     """
-    Ordena los datos por asignatura (Nombre) y luego por Horario.
+    Ordena los datos por asignatura (Asignatura) y luego por Horario.
     """
-    datos = [(tree.set(k, "Nombre"), tree.set(k, "Horario"), k) for k in tree.get_children("")]
-    datos.sort(key=lambda x: (x[0], x[1]))  # Primero por Nombre, luego por Horario
+    datos = [(tree.set(k, "Asignatura"), tree.set(k, "Horario"), k) for k in tree.get_children("")]
+    datos.sort(key=lambda x: (x[0], x[1]))  # Primero por Asignatura, luego por Horario
 
     # Reorganizar los datos ordenados en el Treeview
-    for index, (nombre, horario, k) in enumerate(datos):
+    for index, (Asignatura, horario, k) in enumerate(datos):
         tree.move(k, "", index)
 
 #claves_a_conservar = [1867]
