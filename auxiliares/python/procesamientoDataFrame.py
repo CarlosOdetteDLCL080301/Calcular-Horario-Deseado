@@ -96,10 +96,17 @@ def filtrarTabla(df,columna_cupo,hora_entrada,hora_salida):
 
     return df_filtrado
 
-def imprimirMaterias(materiasPorMeter,hora_entrada,hora_salida,columna_cupo):
+def imprimirMaterias(materiasPorMeter,hora_entrada,hora_salida,columna_cupo, pantalla_carga=None):
     resultados_por_materia = {}
+    # Registraremos cuantas materias se buscaran en la red
+    materias_por_leer = len(materiasPorMeter)
+    for idx, materia in enumerate(materiasPorMeter):
+        # Actualizamos la pantalla de carga si esta disponible
+        if pantalla_carga:
+            mensaje = f"Cargando {materiasPorMeter[materia]} ({idx + 1}/{materias_por_leer})"
+            pantalla_carga.actualizar_progreso(idx + 1, mensaje)
 
-    for materia in materiasPorMeter:
+
         # Obtener el valor correspondiente a la clave 'materia'
         nombreMateria = materiasPorMeter[materia]
         

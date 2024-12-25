@@ -2,6 +2,7 @@
 from auxiliares.python.materiasFI import procesar_materias as extraer_materias_de_la_web
 from auxiliares.python.procesamientoDataFrame import imprimirMaterias
 from auxiliares.python.configuracionGUI import mostrar_resultados_combinados as visualizarGUI
+from auxiliares.python.PantallaDeCarga import PantallaDeCarga
 misMaterias = extraer_materias_de_la_web() 
 
 hora_entrada = 7
@@ -24,6 +25,28 @@ claves_a_conservar = list(map(str, claves_a_conservar))
 # Filtra el diccionario, conservando solo las claves deseadas
 misMaterias_filtrado = {clave: misMaterias[clave] for clave in claves_a_conservar if clave in misMaterias}
 
-# Visualizamos la GUI enviandole el DataFrame filtrado por las características deseadas
-visualizarGUI(imprimirMaterias(misMaterias_filtrado,hora_entrada,hora_salida,columna_cupo))
+# Cremos la pantalla de carga
+def procesar_materias_con_carga():
+    global misMaterias_filtrado
+    pantalla_carga = PantallaDeCarga(max_progreso=len(misMaterias_filtrado))
+    def procesar_dataframe():
+        resultados_filtrados_dataframe = imprimirMaterias(
+            materiasPorMeter=misMaterias_filtrado,
+            hora_entrada=hora_entrada,
+            hora_salida=hora_salida,
+            columna_cupo=columna_cupo,
+            pantalla_carga=pantalla_carga
+        )
+        # Cerrar la pantalla de carga al finalizar
+        pantalla_carga.cerrar()
+        # Visualizamos la GUI enviandole el DataFrame filtrado por las características deseadas
+        visualizarGUI(resultados_filtrados_dataframe)
+
+
+    # Iniciar la pantalla de carga con la función de procesamiento
+    pantalla_carga.iniciar(procesar_dataframe)
+
+# Iniciar la pantalla de carga con la función de procesamiento
+procesar_materias_con_carga()
+
 
