@@ -5,8 +5,23 @@ class PantallaDeCarga:
     def __init__(self, titulo="Cargando Datos", mensaje="Por favor espere...", max_progreso=100):
         self.ventana = tk.Tk()
         self.ventana.title(titulo)
-        self.ventana.geometry("800x200")
 
+        # Dimensiones de la ventana
+        ancho_ventana = 800
+        alto_ventana = 200
+
+        # Obtener dimensiones de la pantalla
+        ancho_pantalla = self.ventana.winfo_screenwidth()
+        alto_pantalla = self.ventana.winfo_screenheight()
+
+        # Calcular posición para centrar
+        x_centro = (ancho_pantalla // 2) - (ancho_ventana // 2)
+        y_centro = (alto_pantalla // 2) - (alto_ventana // 2)
+
+        # Establecer posición centrada
+        self.ventana.geometry(f"{ancho_ventana}x{alto_ventana}+{x_centro}+{y_centro}")
+
+        # Etiqueta y barra de progreso
         self.etiqueta = ttk.Label(self.ventana, text=mensaje, anchor="center")
         self.etiqueta.pack(pady=20)
 

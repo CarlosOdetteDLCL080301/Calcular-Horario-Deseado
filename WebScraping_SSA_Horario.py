@@ -28,7 +28,7 @@ misMaterias_filtrado = {clave: misMaterias[clave] for clave in claves_a_conserva
 # Cremos la pantalla de carga
 def procesar_materias_con_carga():
     global misMaterias_filtrado
-    pantalla_carga = PantallaDeCarga(max_progreso=len(misMaterias_filtrado))
+    pantalla_carga = PantallaDeCarga(titulo="Descargando Datos de SSA-UNAM Horarios",max_progreso=len(misMaterias_filtrado))
     def procesar_dataframe():
         resultados_filtrados_dataframe = imprimirMaterias(
             materiasPorMeter=misMaterias_filtrado,
