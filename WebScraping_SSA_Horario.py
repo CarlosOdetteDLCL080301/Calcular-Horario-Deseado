@@ -3,7 +3,14 @@ from auxiliares.python.materiasFI import procesar_materias as extraer_materias_d
 from auxiliares.python.procesamientoDataFrame import imprimirMaterias
 from auxiliares.python.configuracionGUI import mostrar_resultados_combinados as visualizarGUI
 from auxiliares.python.PantallaDeCarga import PantallaDeCarga
+from auxiliares.python.PantallaDeInicio import pantallaDeInicio
+
+# Extraemos las materias de la web
 misMaterias = extraer_materias_de_la_web() 
+# Creamos la pantalla de inicio, en el que se cuestionara los datos principales de la inscripción
+# que son vitales para el estudiante como lo será la hora de entrada y salida, así como las 
+# materias que desea cursar
+#pantallaDeInicio()
 
 hora_entrada = 7
 hora_salida = 13

@@ -23,7 +23,7 @@ def mostrar_resultados_combinados(resultados_por_materia):
 
     # Anchos de los encabezados y ubicación de los mismos  
     tree.column("Clave", width=10, anchor="center")
-    tree.column("Asignatura", width=230, anchor="w")  
+    tree.column("Asignatura", width=240, anchor="w")  
     tree.column("Grupo", width=10, anchor="center")
     tree.column("Profesor", width=200, anchor="w")
     tree.column("Horario", width=10, anchor="center")
@@ -37,10 +37,27 @@ def mostrar_resultados_combinados(resultados_por_materia):
 
     tree.pack(fill=tk.BOTH, expand=True, padx=10, pady=10)
 
-     # Generar colores aleatorios para cada "Asignatura"
-    def generar_color():
-        return f'#{random.randint(0, 255):02x}{random.randint(0, 255):02x}{random.randint(0, 255):02x}'
+    # Calcular luminancia relativa
+    def calcular_luminancia(color_hex):
+        r, g, b = int(color_hex[1:3], 16), int(color_hex[3:5], 16), int(color_hex[5:7], 16)
+        r = r / 255.0
+        g = g / 255.0
+        b = b / 255.0
+        # Ajuste gamma
+        r = r / 12.92 if r <= 0.03928 else ((r + 0.055) / 1.055) ** 2.4
+        g = g / 12.92 if g <= 0.03928 else ((g + 0.055) / 1.055) ** 2.4
+        b = b / 12.92 if b <= 0.03928 else ((b + 0.055) / 1.055) ** 2.4
+        # Fórmula de luminancia relativa
+        return 0.2126 * r + 0.7152 * g + 0.0722 * b
 
+    # Generar color con buen contraste
+    def generar_color():
+        while True:
+            color = f'#{random.randint(0, 255):02x}{random.randint(0, 255):02x}{random.randint(0, 255):02x}'
+            luminancia = calcular_luminancia(color)
+            # Asegurar contraste con texto negro
+            if luminancia < 0.5:  # 0.5 es un valor aproximado para buen contraste
+                return color
     # Diccionario para asociar nombres con colores
     colores_por_nombre = {}
 
@@ -54,7 +71,7 @@ def mostrar_resultados_combinados(resultados_por_materia):
 
             for _, row in resultados.iterrows():
                 tree.insert("", "end", values=(claveMateria, nombreMateria, *row.tolist()), tags=(nombreMateria,))
-
+    
     # Función para aplicar el orden seleccionado
     def aplicar_orden():
         criterio = combobox.get()  # Obtener el criterio seleccionado
@@ -65,7 +82,7 @@ def mostrar_resultados_combinados(resultados_por_materia):
 
     # Lista de opciones para el ordenamiento
     columnas_sencillas = ["Clave", "Asignatura", "Profesor", "Horario", "Días", "Cupo"]
-    opciones = columnas_sencillas + ["Asignatura y Horario"]
+    opciones = columnas_sencillas + ["Asignatura y Horario","Calidad de profesor"]
 
     # Crear combobox para seleccionar el ordenamiento
     combobox = ttk.Combobox(ventana, values=opciones, state="readonly")
