@@ -3,7 +3,7 @@ from auxiliares.python.materiasFI import procesar_materias as extraer_materias_d
 from auxiliares.python.procesamientoDataFrame import imprimirMaterias
 from auxiliares.python.configuracionGUI import mostrar_resultados_combinados as visualizarGUI
 from auxiliares.python.PantallaDeCarga import PantallaDeCarga
-from auxiliares.python.PantallaDeInicio import pantallaDeInicio
+from auxiliares.python.HorarioEstudiosApp import HorarioEstudiosApp
 
 # Extraemos las materias de la web
 misMaterias = extraer_materias_de_la_web() 
