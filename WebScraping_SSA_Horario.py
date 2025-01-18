@@ -3,7 +3,7 @@ from auxiliares.python.materiasFI import procesar_materias as extraer_materias_d
 from auxiliares.python.procesamientoDataFrame import imprimirMaterias
 from auxiliares.python.configuracionGUI import mostrar_resultados_combinados as visualizarGUI
 from auxiliares.python.PantallaDeCarga import PantallaDeCarga
-from auxiliares.python.HorarioEstudiosApp import HorarioEstudiosApp
+#from auxiliares.python.HorarioEstudiosApp import HorarioEstudiosApp
 
 # Extraemos las materias de la web
 misMaterias = extraer_materias_de_la_web() 
@@ -13,9 +13,9 @@ misMaterias = extraer_materias_de_la_web()
 #pantallaDeInicio()
 
 hora_entrada = 7
-hora_salida = 13
+hora_salida = 11
 # Esta es la columna que representa el cupo en el DataFrame
-columna_cupo = 7
+columna_cupo = 6
 # Lista de claves que deseas conservar
 claves_a_conservar = [1867,6867,1858,1765,2901,2914,2927,2928,2929,2930,2931,1866,2932,2934,2944,2945,2946,2947,2948.0674,2949,2950,1916,1018,2951,2952,'0757',2954,2955,2956,2957]
 # Agregaremos materias ya cursadas para que no se considere en la entrega de horarios
